@@ -110,6 +110,14 @@ function resetFields() {
         input.value = '';
         input.nextElementSibling.style.top = "50%";
     });
+
+    if (localStorage.getItem("rememberMe") == "true") {
+        let parsedDetails = JSON.parse(localStorage.getItem("userDetails"))
+        loginEmailInput.value = parsedDetails["email"]
+        loginPasswordInput.value = parsedDetails["password"]
+        loginEmailInput.nextElementSibling.style.top = "-5px";
+        loginPasswordInput.nextElementSibling.style.top = "-5px";
+    }
 }
 
 function login(email, password) {
