@@ -63,10 +63,31 @@ btnPopup.addEventListener('click', () => {
 });
 
 registrationForm.addEventListener('submit', function(e){
+    e.preventDefault();
     if(!termsAndConditionsCheckbox.checked){
-        e.preventDefault();
         console.log('Terms and conditions checkbox not checked!');
         alert('You must agree to the terms and conditions before registering.'); 
+    } else {
+        const newUserEmail = registerEmailInput.value;
+        const newUserPassword = registerPasswordInput.value;
+
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        if (users.some(user => user.email === newUserEmail)) {
+            alert('Email already registered');
+            return;
+        }
+
+        users.push({
+            email: newUserEmail,
+            password: newUserPassword
+        });
+
+        localStorage.setItem('users', JSON.stringify(users));
+
+        alert('Registration successful');
+        wrapper.classList.remove('active');
+        resetFields();
     }
 });
 
@@ -121,12 +142,8 @@ function resetFields() {
 }
 
 function login(email, password) {
-    const testUser = {
-        email: 'test@example.com',
-        password: 'password123'
-    };
-
-    if (email === testUser.email && password === testUser.password) {
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    if (users.some(user => user.email === email && user.password === password)) {
         alert('Login successful');
     } else {
         alert('Invalid email or password');
