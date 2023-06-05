@@ -9,15 +9,24 @@
     <title>Random User Generator</title>
 </head>
 <body>
+    <div class="banner">
+        <div class="title">Lean</div>
+        <div class="nav-links">
+            <a href="#liked">Liked</a>
+            <a href="#disliked">Disliked</a>
+            <a href="#preferences">Preferences</a>
+        </div>
+    </div>
+
     <div id="app">
-        <div v-if="loading">Loading...</div>
-        <div v-else :class="animationClass">
+        <div :class="['user-profile', animationClass]">
             <img :class="gender" v-bind:src="picture" v-bind:alt="`${firstName} ${lastName}`">
             <h1>{{firstName}} {{lastName}}</h1>
         </div>
+
         <div class="icons">
-            <button @click="addToDisliked"><ion-icon name="close-circle-outline"></ion-icon></button>
-            <button @click="addToLiked"><ion-icon name="heart-circle"></ion-icon></button>
+            <ion-icon name="close-circle-outline" class="icon" @click="addToDisliked()"></ion-icon>
+            <ion-icon name="heart-circle" class="icon" @click="addToLiked()"></ion-icon>
         </div>
     </div>
 
