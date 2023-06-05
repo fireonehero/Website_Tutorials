@@ -7,13 +7,11 @@ const app = Vue.createApp({
             picture: '',
             liked: [],
             disliked: [],
-            animationClass: '',
-            loading: true
+            animationClass: ''
         };
     },
     methods: {
         async getUser() {
-            this.loading = true; 
             const res = await fetch('https://randomuser.me/api');
             const { results } = await res.json();
 
@@ -21,7 +19,6 @@ const app = Vue.createApp({
             this.lastName = results[0].name.last;
             this.gender = results[0].gender;
             this.picture = results[0].picture.large;
-            this.loading = false;
             this.animationClass = this.animationClass === 'like' ? 'fade-in-right' : 'fade-in-left';
         },
         addToLiked() {
