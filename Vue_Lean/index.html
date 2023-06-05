@@ -12,21 +12,20 @@
     <div class="banner">
         <div class="title">Lean</div>
         <div class="nav-links">
-            <a href="#liked">Liked</a>
-            <a href="#disliked">Disliked</a>
-            <a href="#preferences">Preferences</a>
+            <a href="#">Liked</a>
+            <a href="#">Disliked</a>
+            <a href="#">Preferences</a>
         </div>
     </div>
 
     <div id="app">
-        <div :class="['user-profile', animationClass]">
-            <img :class="gender" v-bind:src="picture" v-bind:alt="`${firstName} ${lastName}`">
+        <div :class="animationClass" class="user-profile">
+            <img :class="[gender]" v-bind:src="picture" v-bind:alt="`${firstName} ${lastName}`" class="pfp">
             <h1>{{firstName}} {{lastName}}</h1>
         </div>
-
         <div class="icons">
-            <ion-icon name="close-circle-outline" class="icon" @click="addToDisliked()"></ion-icon>
-            <ion-icon name="heart-circle" class="icon" @click="addToLiked()"></ion-icon>
+            <button @mousedown="pressed = true" @mouseup="pressed = false, addToDisliked()" :class="{ pressed: pressed }"><ion-icon name="close-circle-outline"></ion-icon></button>
+            <button @mousedown="pressed = true" @mouseup="pressed = false, addToLiked()" :class="{ pressed: pressed }"><ion-icon name="heart-circle"></ion-icon></button>
         </div>
     </div>
 
