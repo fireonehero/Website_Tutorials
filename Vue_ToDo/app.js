@@ -5,27 +5,26 @@ const app = Vue.createApp({
         tasks: [],
         editIndex: null,
         editText: '',
-        currentFilter: 'all'
+        filter: 'all'
       };
     },
-    created() {
-      const savedTasks = localStorage.getItem('tasks');
-      if (savedTasks) {
-        this.tasks = JSON.parse(savedTasks);
-      }
-    },
-    watch: {
-      tasks: {
-        handler() {
-          this.saveTasksToLocalStorage();
-        },
-        deep: true
+    computed: {
+      filteredTasks() {
+        if (this.filter === 'pending') {
+          return this.tasks.filter(task => !task.done);
+        } else if (this.filter === 'done') {
+          return this.tasks.filter(task => task.done);
+        }
+        return this.tasks;
       }
     },
     methods: {
       addTask() {
         if (this.newTask.trim() !== '') {
-          this.tasks.push({ text: this.newTask, done: false });
+          this.tasks.push({
+            text: this.newTask,
+            done: false
+          });
           this.newTask = '';
         }
       },
@@ -36,33 +35,49 @@ const app = Vue.createApp({
         this.editIndex = index;
         this.editText = this.tasks[index].text;
       },
-      saveEdit() {
-        this.tasks[this.editIndex].text = this.editText;
+      saveEdit(task, newText) {
+        task.text = newText;
         this.editIndex = null;
-        this.editText = '';
+      },
+      cancelEdit() {
+        this.editIndex = null;
       },
       clearAllTasks() {
         this.tasks = [];
       },
-      filterTasks(filter) {
-        this.currentFilter = filter;
-      },
-      saveTasksToLocalStorage() {
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
-      }
-    },
-    computed: {
-      filteredTasks() {
-        if (this.currentFilter === 'all') {
-          return this.tasks;
-        } else if (this.currentFilter === 'pending') {
-          return this.tasks.filter(task => !task.done);
-        } else if (this.currentFilter === 'done') {
-          return this.tasks.filter(task => task.done);
-        }
-        return this.tasks;
+      setFilter(filter) {
+        this.filter = filter;
       }
     }
+  });
+  
+  app.component('edit-task', {
+    props: {
+      task: {
+        type: Object,
+        required: true
+      }
+    },
+    data() {
+      return {
+        editedText: this.task.text
+      };
+    },
+    methods: {
+      saveEdit() {
+        this.$emit('save', this.task, this.editedText);
+      },
+      cancelEdit() {
+        this.$emit('cancel');
+      }
+    },
+    template: `
+      <div class="edit-task">
+        <input v-model="editedText" @keyup.enter="saveEdit" @keyup.esc="cancelEdit">
+        <button @click="saveEdit">Save</button>
+        <button @click="cancelEdit">Cancel</button>
+      </div>
+    `
   });
   
   app.mount('#app');

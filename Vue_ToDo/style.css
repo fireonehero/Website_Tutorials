@@ -1,48 +1,43 @@
 body {
     background: lightblue;
     font-family: 'Arial', sans-serif;
-}
-
-.app {
+  }
+  
+  .app {
     background: #fff;
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
     border-radius: 4px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.addTask .task-input {
-    display: flex;
-    flex-direction: column;
+  }
+  
+  .addTask .task-input {
     margin-bottom: 20px;
-}
-
-.addTask .task-input label {
-    font-weight: bold;
+  }
+  
+  .addTask .task-input label {
+    display: block;
+    font-size: 18px;
     margin-bottom: 5px;
-}
-
-.addTask textarea {
+  }
+  
+  .addTask .task-input input {
     width: 100%;
     padding: 10px;
     font-size: 18px;
     box-sizing: border-box;
-    margin-bottom: 10px;
     border: 2px solid #ccc;
     border-radius: 4px;
-    resize: vertical;
-    text-align: left;
-}
-
-.buttons {
+  }
+  
+  .buttons {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-}
-
-.buttons button {
-    position: relative;
+  }
+  
+  .buttons button {
     font-size: 1.1em;
     color: #000;
     text-decoration: none;
@@ -51,10 +46,11 @@ body {
     padding: 10px;
     cursor: pointer;
     overflow: hidden;
-    background-color: transparent;
-}
-
-.buttons button::after {
+    background: none;
+    position: relative;
+  }
+  
+  .buttons button::after {
     content: '';
     position: absolute;
     left: 0;
@@ -65,14 +61,14 @@ body {
     transform-origin: right;
     transform: scaleX(0);
     transition: transform .5s;
-}
-
-.buttons button:hover::after {
+  }
+  
+  .buttons button.active::after {
     transform-origin: left;
     transform: scaleX(1);
-}
-
-.task {
+  }
+  
+  .task {
     background: #f9f9f9;
     padding: 10px;
     border-radius: 4px;
@@ -80,13 +76,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.task.done span:first-child {
+  }
+  
+  .task.done span:first-child {
     text-decoration: line-through;
-}
-
-.checkmark {
+  }
+  
+  .checkmark {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -94,11 +90,12 @@ body {
     text-align: center;
     line-height: 20px;
     cursor: pointer;
-}
-
-.edit-button {
+  }
+  
+  .edit-button {
     font-size: 1.2em;
-    background-color: transparent;
+    background: none;
     border: none;
     cursor: pointer;
-}
+  }
+  
