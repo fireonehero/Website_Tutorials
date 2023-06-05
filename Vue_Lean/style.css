@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: lightblue;
+}
+
+#app {
+  width: 400px;
+  height: 100vh;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1, h3 {
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
+img {
+  border-radius: 50%;
+  border: 5px #333 solid;
+  margin-bottom: 1rem;
+}
+
+.male {
+  border-color: steelblue;
+}
+
+.female {
+  border-color: pink;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 200px;
+}
+
+ion-icon {
+  font-size: 4rem;
+  color: #333;
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.5) translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+      opacity: 0;
+      transform: translateX(-50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes fade-out-right {
+  from {
+      opacity: 1;
+      transform: translateX(0);
+  }
+  to {
+      opacity: 0;
+      transform: translateX(50px);
+  }
+}
+
+@keyframes fade-in-right {
+  from {
+      opacity: 0;
+      transform: translateX(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes fade-out-left {
+  from {
+      opacity: 1;
+      transform: translateX(0);
+  }
+  to {
+      opacity: 0;
+      transform: translateX(-50px);
+  }
+}
+
+.like {
+  animation: fade-out-right 2s;
+  animation-fill-mode: forwards;
+}
+
+.dislike {
+  animation: fade-out-left 2s;
+  animation-fill-mode: forwards;
+}
+
+.fade-in-left {
+  animation: fade-in-left 2s;
+  animation-fill-mode: forwards;
+}
+
+.fade-in-right {
+  animation: fade-in-right 2s;
+  animation-fill-mode: forwards;
+}

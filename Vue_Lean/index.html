@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons.js"></script>
+    <title>Random User Generator</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="loading">Loading...</div>
+        <div v-else :class="animationClass">
+            <img :class="gender" v-bind:src="picture" v-bind:alt="`${firstName} ${lastName}`">
+            <h1>{{firstName}} {{lastName}}</h1>
+        </div>
+        <div class="icons">
+            <button @click="addToDisliked"><ion-icon name="close-circle-outline"></ion-icon></button>
+            <button @click="addToLiked"><ion-icon name="heart-circle"></ion-icon></button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
