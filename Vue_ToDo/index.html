@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ToDo App</title>
+</head>
+<body>
+    <div class="app" id="app">
+        <div class="addTask">
+            <div class="task-input">
+                <label for="task">New Task:</label>
+                <textarea id="task" v-model="newTask" placeholder="Enter your task here" @keyup.enter="addTask"></textarea>
+            </div>
+            <div class="buttons">
+                <button>All</button>
+                <button>Pending</button>
+                <button>Done</button>
+                <button>Clear All</button>
+            </div>
+            <div class="task" v-for="(task, index) in tasks" :key="index">
+                <div class="checkmark" @click="toggleDone(index)">
+                    <div v-if="task.done">✔</div>
+                </div>
+                <span v-if="editIndex !== index" :class="{ done: task.done }">{{ task.text }}</span>
+                <input v-else v-model="editText" @keyup.enter="saveEdit">
+                <button @click="editTask(index)" class="edit-button">🖉</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="app.js"></script>
+</body>
+</html>
