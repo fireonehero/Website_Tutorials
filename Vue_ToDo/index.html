@@ -15,12 +15,12 @@
                 <textarea id="task" v-model="newTask" placeholder="Enter your task here" @keyup.enter="addTask"></textarea>
             </div>
             <div class="buttons">
-                <button>All</button>
-                <button>Pending</button>
-                <button>Done</button>
-                <button>Clear All</button>
+                <button @click="filterTasks('all')">All</button>
+                <button @click="filterTasks('pending')">Pending</button>
+                <button @click="filterTasks('done')">Done</button>
+                <button @click="clearAllTasks">Clear All</button>
             </div>
-            <div class="task" v-for="(task, index) in tasks" :key="index">
+            <div class="task" v-for="(task, index) in filteredTasks" :key="index">
                 <div class="checkmark" @click="toggleDone(index)">
                     <div v-if="task.done">✔</div>
                 </div>
@@ -30,6 +30,7 @@
             </div>
         </div>
     </div>
+    
     <script src="https://unpkg.com/vue@3"></script>
     <script src="app.js"></script>
 </body>

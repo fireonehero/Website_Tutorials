@@ -4,7 +4,8 @@ const app = Vue.createApp({
             newTask: '',
             tasks: [],
             editIndex: null,
-            editText: ''
+            editText: '',
+            currentFilter: 'all'
         }
     },
     methods: {
@@ -25,6 +26,24 @@ const app = Vue.createApp({
             this.tasks[this.editIndex].text = this.editText;
             this.editIndex = null;
             this.editText = '';
+        },
+        clearAllTasks() {
+            this.tasks = [];
+        },
+        filterTasks(filter) {
+            this.currentFilter = filter;
+        }
+    },
+    computed: {
+        filteredTasks() {
+            if (this.currentFilter === 'all') {
+                return this.tasks;
+            } else if (this.currentFilter === 'pending') {
+                return this.tasks.filter(task => !task.done);
+            } else if (this.currentFilter === 'done') {
+                return this.tasks.filter(task => task.done);
+            }
+            return this.tasks;
         }
     }
 });
